@@ -21,3 +21,12 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# VSCode settings
+.vscode/
