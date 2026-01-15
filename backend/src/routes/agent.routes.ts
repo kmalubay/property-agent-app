@@ -1,10 +1,12 @@
-
-const { Router } = require("express");
-const { agentStore, isEmailTaken } = require("../store/agent.store");
+import { Router } from "express";
+import { agentStore, isEmailTaken } from "../store/agent.store";
+import { PropertyAgent } from "../models/PropertyAgent";
 
 const router = Router();
 
-/** Create / Update agent */
+/**
+ * Create or Update Agent (Upsert)
+ */
 router.post("/", (req, res) => {
   const { id, firstName, lastName, email, mobileNumber } = req.body;
 
@@ -19,7 +21,7 @@ router.post("/", (req, res) => {
   const now = new Date();
   const existing = agentStore.get(id);
 
-  const agent = {
+  const agent: PropertyAgent = {
     id,
     firstName,
     lastName,
@@ -34,19 +36,25 @@ router.post("/", (req, res) => {
   res.status(existing ? 200 : 201).json(agent);
 });
 
-/** Get all agents */
+/**
+ * Get all agents
+ */
 router.get("/", (_req, res) => {
   res.json(Array.from(agentStore.values()));
 });
 
-/** Get single agent */
+/**
+ * Get single agent
+ */
 router.get("/:id", (req, res) => {
   const agent = agentStore.get(req.params.id);
   if (!agent) return res.status(404).json({ message: "Agent not found" });
   res.json(agent);
 });
 
-/** Delete agent */
+/**
+ * Delete agent
+ */
 router.delete("/:id", (req, res) => {
   if (!agentStore.has(req.params.id)) {
     return res.status(404).json({ message: "Agent not found" });
@@ -55,4 +63,4 @@ router.delete("/:id", (req, res) => {
   res.status(204).send();
 });
 
-module.exports = router;
+export default router;

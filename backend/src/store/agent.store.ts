@@ -1,12 +1,13 @@
-const { PropertyAgentData } = require("../models/PropertyAgent");
+import { PropertyAgent } from "../models/PropertyAgent";
 
-const agentMap = new Map();
+export const agentStore = new Map<string, PropertyAgent>();
 
-function checkEmailTaken(email, id) {
+// Function to check if email already exists
+export const isEmailTaken = (email: string, id?: string): boolean => {
   for (const agent of agentStore.values()) {
-    if (agent.email === email && agent.id !== id) return true;
+    if (agent.email === email && agent.id !== id) {
+      return true;
+    }
   }
   return false;
-}
-
-module.exports = { agentMap, checkEmailTaken };
+};

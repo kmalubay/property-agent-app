@@ -1,12 +1,14 @@
-const express = require("express");
-const cors = require("cors");
-const agentRoutes = require("./routes/agent.routes");
+import express from "express";
+import cors from "cors";
+import agentRoutes from "./routes/agent.routes";
 
-const backendApp = express(); // renamed variable
+const app = express();
 
-backendApp.use(cors());
-backendApp.use(express.json());
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-backendApp.use("/agents", agentRoutes);
+// Routes
+app.use("/agents", agentRoutes);
 
-module.exports = backendApp;
+export default app;
