@@ -14,7 +14,7 @@ This project is a simple full-stack TypeScript application demonstrating:
 ## Structure
 - `/backend` – REST API
 - `/frontend` – Vue client
-- `/docs` – ER Diagram and documentation
+- `/docs` – ER Diagram
 
 ## Stretch Goal
 - Input validation and email uniqueness enforcement
